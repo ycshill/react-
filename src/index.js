@@ -1,15 +1,14 @@
-/*
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2019-09-29 10:56:41
- * @LastEditTime: 2019-09-29 20:29:23
- * @LastEditors: Please set LastEditors
- */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoList from './TodoList';
-// import ToggleText from './ToggleText';
-import './style.css';
 
-ReactDOM.render(<TodoList />, document.querySelector('#root'));
+import store from './store/index';
+import TodoList from './TodoList';
+import { Provider } from 'react-redux';
+
+const App = (
+  <Provider store={store}>
+    <TodoList store={store}/>
+  </Provider>
+);
+
+ReactDOM.render(App, document.querySelector('#root'));

@@ -1,60 +1,63 @@
+import React from 'react';
+// import store from './store/index';
+import { connect } from 'react-redux';
 
-import React, { Component } from 'react';
-import store from './store';
-import { inputChangeAction, addItemAction, deleteItemAction, getMyListAction} from './store/actions';
-import TodoListUI from './TodoListUI';
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    // 放状态
-    this.state = store.getState();
-
-    store.subscribe(this.setStore)
-  }
-
-  componentDidMount() {
-    const action = getMyListAction();
-    store.dispatch(action);
-  }
-
-  inputChange = (e) => {
-    const action = inputChangeAction(e.target.value);
-
-    store.dispatch(action);
-  }
-
-  /**
-   * @description: 添加
-   * @param {type}
-   * @return:
-   */
-  addList = () => {
-    const action = addItemAction();
-    store.dispatch(action);
-  }
-
-  deleteItem = (id) => {
-    const action = deleteItemAction(id);
-    store.dispatch(action);
-  }
-
-  setStore = () => {
-    this.setState(store.getState());
-  }
-
-  render() {
-    const { inputVal, todoList } = this.state;
-    return (
-      <TodoListUI
-        inputVal={inputVal}
-        todoList={todoList}
-        inputChange={this.inputChange}
-        addList={this.addList}
-        deleteItem={this.deleteItem}
-      />
-    );
-  }
+// 用一个无状态的组件，这样的话可以达到UI和逻辑的分离
+const TodoList = (props) => {
+  const { inputValue, list, inputChange, addItem, deleteItem} = props;
+  return (
+    <div>
+      <div>
+        <input value={inputValue} onChange={inputChange}></input>
+        <button onClick={addItem}>增加</button>
+      </div>
+      <ul>
+        {list.map((item, index) => {
+          return (
+            <li key={index} onClick={() => deleteItem(index)}>{item}</li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
 
-export default TodoList;
+
+// 这里是逻辑
+const mapStateToProps = (state) => {
+  return {
+    inputValue: state.inputValue,
+    list: state.list,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    inputChange(e){
+      const action = {
+        type: 'inputChange',
+        value: e.target.value,
+      }
+
+      dispatch(action);
+    },
+    addItem() {
+      const action = {
+        type: 'addItem',
+      };
+
+      dispatch(action);
+    },
+    deleteItem(index) {
+      const action = {
+        type: 'deleteItem',
+        index,
+      };
+
+      dispatch(action);
+    }
+  };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TodoList);
