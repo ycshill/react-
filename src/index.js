@@ -1,14 +1,6 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom';
 
-import store from './store/index';
-import TodoList from './TodoList';
-import { Provider } from 'react-redux';
+import AppRouter from './AppRouter';
 
-const App = (
-  <Provider store={store}>
-    <TodoList store={store}/>
-  </Provider>
-);
-
-ReactDOM.render(App, document.querySelector('#root'));
+ReactDOM.render(<AppRouter />, document.querySelector('#root'));
