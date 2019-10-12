@@ -30,11 +30,17 @@ function List(props) {
   const [id, setId] = useState('');
   useEffect(() => {
     setId(props.match.params.id);
+    props.history.push('/redirect/');
     console.log(id, '我是id');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return(<div>列表{id}</div>)
+}
+
+// 重定向页面
+function RedirectPage() {
+  return(<div>重定向页面</div>)
 }
 
 function AppRouter()  {
@@ -50,6 +56,7 @@ function AppRouter()  {
       </ul>
       <Route path="/" exact component={Index} />
       <Route path="/list/:id" component={List} />
+      <Route path="/redirect/" component={RedirectPage} />
     </Router>
   );
 }
