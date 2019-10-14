@@ -2,6 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 
 // import AppRouter from './AppRouter';
-import RouteNest from './RouteNest';
+import Count from './pages/count/Count';
 
-ReactDOM.render(<RouteNest />, document.querySelector('#root'));
+ReactDOM.render(<Count />, document.querySelector('#root'));
