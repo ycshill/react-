@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 
-import AppRouter from './AppRouter';
+// import AppRouter from './AppRouter';
+import RouteNest from './RouteNest';
 
-ReactDOM.render(<AppRouter />, document.querySelector('#root'));
+ReactDOM.render(<RouteNest />, document.querySelector('#root'));
