@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import Count from './pages/count/Count';
 import Person from './pages/person/Person';
 import ContextP from './pages/Context/Context';
+import ReducerDemo from './pages/reducer/ReducerDemo'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Count />
       <Person />
       <ContextP />
+      <ReducerDemo />
     </div>
   );
 }
